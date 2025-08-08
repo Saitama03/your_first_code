@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../data/models/models.dart';
 import '../../data/repositories/supabase_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'booking_screen.dart';
 
 final myAppointmentsProvider =
     FutureProvider<List<AppointmentModel>>((ref) async {
@@ -21,7 +22,9 @@ class AppointmentsScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('My Appointments')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO: push booking screen
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const BookingScreen()),
+          );
         },
         label: const Text('Book'),
         icon: const Icon(Icons.add),

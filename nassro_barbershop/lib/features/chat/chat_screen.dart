@@ -28,8 +28,8 @@ final _chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
           .map((e) => MessageModel.fromMap(e as Map<String, dynamic>))
           .toList());
 
-  return StreamZip<List<MessageModel>>([sentStream, receivedStream])
-      .map((lists) => [...lists[0], ...lists[1]]
+  return StreamZip<List<MessageModel>>([sentStream, receivedStream]).map(
+      (lists) => [...lists[0], ...lists[1]]
         ..sort((a, b) => a.createdAt.compareTo(b.createdAt)));
 });
 

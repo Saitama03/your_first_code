@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'features/client/client_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,16 +37,16 @@ class NassroApp extends ConsumerWidget {
               builder: (context, state) => const AuthScreen(),
             ),
             GoRoute(
+              path: 'app',
+              builder: (context, state) => const ClientShell(),
+            ),
+            GoRoute(
               path: 'admin',
               builder: (context, state) => const AdminDashboardScreen(),
             ),
           ],
         ),
       ],
-      redirect: (context, state) {
-        // Placeholder for role-based redirects later
-        return null;
-      },
     );
 
     return MaterialApp.router(
@@ -109,7 +110,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         email: emailController.text.trim(),
         password: passwordController.text,
       );
-      if (mounted) context.go('/');
+      if (mounted) context.go('/app');
     } on AuthException catch (e) {
       setState(() => errorText = e.message);
     } finally {
@@ -124,7 +125,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         email: emailController.text.trim(),
         password: passwordController.text,
       );
-      if (mounted) context.go('/');
+      if (mounted) context.go('/app');
     } on AuthException catch (e) {
       setState(() => errorText = e.message);
     } finally {
